@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+
+### Applications Code Container #############################
+
+    applications:
+      image: tianon/true
+      volumes:
+        - ./:/var/www
+
+### PHP Container ###########################
+
+    php:
+      build:
+        context: ./docker/php
+      volumes_from:
+        - applications
+      ports:
+         - "9050:9050"
+      tty: true
+      depends_on:
+        - mysql
+        - redis
+
+### MySQL Container #########################################
+
+    mysql:
+      build:
+        context: ./docker/mysql
+        args:
+          - MYSQL_DATABASE=hongpa
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=root
+          - MYSQL_ROOT_PASSWORD=root
+      volumes:
+        - mysql:/var/lib/mysql
+      ports:
+        - "3306:3306"
+
+### Redis Container #########################################
+
+    redis:
+        build:
+          context: ./docker/redis
+        volumes:
+            - redis:/data
+        ports:
+            - "6379:6379"
+
+### Volumes Setup ###########################################
+
+volumes:
+  mysql:
+    driver: "local"
+  redis:
+    driver: "local"

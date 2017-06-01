@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="app.env" value="docker"/>
+        <env name="database.host" value="mysql"/>
+        <env name="database.port" value="3306"/>
+        <env name="swoole.host" value="0.0.0.0"/>
+        <env name="swoole.port" value="9050"/>
+    </php>
+    <logging>
+        <log type="coverage-html" target="storage/phpunit/html"/>
+        <log type="coverage-php" target="storage/phpunit/coverage.serialized"/>
+        <log type="coverage-text" target="php://stdout"/>
+    </logging>
+</phpunit>

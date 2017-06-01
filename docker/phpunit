@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CUR_DIR=$(cd "$(dirname "$0")"; pwd)
+cd $CUR_DIR/..
+
+docker-compose exec php php -dzend_extension=xdebug.so /var/www/vendor/bin/phpunit

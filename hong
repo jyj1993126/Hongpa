@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+define('BASE_DIR', __DIR__);
+
+require BASE_DIR . '/vendor/autoload.php';
+
+//get env option and clear
+$options = getopt(null, ['env:']);
+$env = isset($options['env']) ? trim($options['env']) : null;
+if (isset($options['env'])) {
+    foreach ($_SERVER['argv'] as $index => $arg) {
+        if (strpos($arg, '--env=') !== false) {
+            unset($_SERVER['argv'][$index]);
+            break;
+        }
+    }
+}
+
+app()->initialize($env ?: '.env');
+
+app()->bootstrap();
+
+app('console')->run();

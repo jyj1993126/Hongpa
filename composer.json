@@ -1,0 +1,50 @@
+{
+  "name": "jyj1993126/Hongpa",
+  "type": "project",
+  "version": "0.1.0",
+  "require": {
+    "symfony/console": "^3.2",
+    "illuminate/support": "^5.4",
+    "illuminate/container": "^5.4",
+    "illuminate/config": "^5.4",
+    "illuminate/database": "^5.4",
+    "illuminate/console": "^5.4",
+    "illuminate/filesystem": "^5.4",
+    "illuminate/log": "^5.4",
+    "illuminate/events": "^5.4",
+    "illuminate/http": "^5.4",
+    "vlucas/phpdotenv": "^2.4",
+    "symfony/process": "^3.2",
+    "phpunit/phpunit": "^6.1",
+    "curl/curl": "^1.6",
+    "php": "^7.1.2",
+    "ext-swoole": "^2.0.7",
+    "sqrt-pro/query-builder": "^0.1.0",
+    "jeremeamia/superclosure": "^2.3"
+  },
+  "authors": [
+    {
+      "name": "Leon",
+      "email": "jyj1993126@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    },
+    "files": [
+      "app/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ]
+  },
+  "minimum-stability": "stable",
+  "require-dev": {
+    "eaglewu/swoole-ide-helper": "dev-master",
+    "squizlabs/php_codesniffer": "^3.0",
+    "jakub-onderka/php-parallel-lint": "^0.9.2"
+  }
+}

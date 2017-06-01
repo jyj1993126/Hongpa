@@ -1,0 +1,45 @@
+#!/bin/bash
+
+CUR_DIR=$(cd "$(dirname "$0")"; pwd)
+
+# 这是一个pre-commit 的脚本
+
+START_DATE=$(date +"%s")
+
+cd $CUR_DIR/../..
+
+PHP_CBF=vendor/bin/phpcbf
+PHP_LINT=vendor/bin/parallel-lint
+
+filenames=""
+for filename in `git diff --cached --name-only --diff-filter=AM`;do
+    if [[ "${filename##*.}" == "php" ]]; then
+        filenames="${filenames} ${filename}"
+    fi
+done
+
+if [ -n "$filenames" ]; then
+    if [[ -e "${PHP_LINT}" ]]; then
+        ${PHP_LINT} $filenames
+    else
+        echo "${PHP_LINT} is not installed."
+    fi
+
+    if [[ $? -gt 0 ]]; then
+        exit 1
+    fi
+    
+    if [[ -e "${PHP_CBF}" ]]; then
+        ${PHP_CBF} --standard=ruleset.xml $filenames 
+	git add $filenames
+    else
+        echo "${PHP_CBF} is not installed."
+    fi
+else
+    echo "No php file added."
+fi
+
+END_DATE=$(date +"%s")
+
+DIFF=$(($END_DATE - $START_DATE))
+echo "took $(($DIFF / 60)) minutes and $(($DIFF % 60)) seconds to complete."
