@@ -14,14 +14,14 @@
 - 单元测试
 
 ## 快速上手
-###运行开发环境
+### 运行开发环境
 1. 下载安装 docker
 2. cd 进入根目录
 3. `docker-compose up -d` 启动相关docker容器
 在docker中使用命令行工具：
 `./docker/hong`
 
-###Hello World
+### Hello World
 1.在 IndexController 中加入
 ```
 public function hello()
@@ -32,5 +32,5 @@ public function hello()
 2.执行 `docker-compose restart php` 重启swoole
 3.`curl http://127.0.0.1:9050/index/hello/`
 
-###关于Hongpa
+### 关于Hongpa
 项目仍处于开发中，会存在一些不完善或者不规范之处，欢迎PR。
